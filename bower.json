@@ -1,0 +1,16 @@
+{
+  "name": "ct-hackathon-presentation",
+  "homepage": "https://github.com/cdriscol/ct-hackathon-presentation",
+  "authors": [
+    "Chris Driscol <cdriscol@commercialtribe.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "reveal.js": "~3.2.0",
+    "highlightjs": "~9.0.0"
+  }
+}
