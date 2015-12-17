@@ -16,10 +16,12 @@
     <div class="slides">
       <section class="present">
         <h2>CT 2015 Hackathon A/B Testing</h2>
-        <p>by Chris Driscol &amp; Steve Tyree</p>
+        <img data-src="http://cdn.meme.am/instances/55471036.jpg">
+        <p>Chris Driscol &amp; Steve Tyree</p>
       </section>
       <section>
         <h2>wtf is a/b testing?</h2>
+        <img data-src="http://cdn.gifbay.com/2013/08/when_i_walk_into_the_mens_bathroom_and_there_are_no_urinals-76365.gif">
         <ul>
           <li class="fragment">expirements</li>
           <li class="fragment">comparing 2+ designs, workflows, etc</li>
@@ -29,35 +31,10 @@
       <section>
         <h2>what we needed:</h2>
         <ul>
-          <li class="fragment">experiments</li>
           <li class="fragment">toggles</li>
+          <li class="fragment">experiment</li>
           <li class="fragment">analytics</li>
         </ul>
-      </section>
-      <section>
-        <section>
-          <h2>experiment..</h2>
-          <h3 class="fragment">user creation</h3>
-        </section>
-        <section>
-          <h2>using a modal (A)</h2>
-          <img width="500" data-src="img/uc_modal.png"></img>
-        </section>
-        <section>
-          <h2>using a page (B)</h2>
-          <img width="500" data-src="img/uc_page.png"></img>
-        </section>
-        <section>
-          <h2>measuring</h2>
-          <ul>
-            <li class="fragment">time to create</li>
-            <li class="fragment">saves per view</li>
-          </ul>
-        </section>
-        <section>
-          <h2>an example..</h2>
-          <a href="http://localhost:9009/#/admin/users" target="_blank">create user</a>
-        </section>
       </section>
       <section>
         <section>
@@ -85,6 +62,43 @@ if(featureFlags.isOn('fuzzy-router')) {
       </section>
       <section>
         <section>
+          <h2>experiment..</h2>
+          <p class="fragment">user creation</p>
+        </section>
+        <section>
+          <h2>using a modal (A)</h2>
+          <img width="500" data-src="img/uc_modal.png"></img>
+        </section>
+        <section>
+          <h2>using a page (B)</h2>
+          <img width="500" data-src="img/uc_page.png"></img>
+        </section>
+        <section>
+          <h2>measuring</h2>
+          <ul>
+            <li class="fragment">time to create</li>
+            <li class="fragment">saves per view</li>
+          </ul>
+        </section>
+        <section>
+          <h2>an example..</h2>
+          <a href="http://localhost:9009/#/admin/users" target="_blank">create user</a>
+        </section>
+        <section>
+          <h2>code please..</h2>
+          <pre><code class="language-javascript" data-trim contenteditable>
+function showCreateUser(user, trackers) {
+    if(featureFlags.isOn('ST01B')) {
+        // navigate to page
+    } else {
+        // show dialog
+    }
+}
+          </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
           <h2>analytics</h2>
           <ul>
             <li class="fragment">piwik events</li>
@@ -101,10 +115,9 @@ if(featureFlags.isOn('fuzzy-router')) {
 function showCreateUser(user, trackers) {
     var experiment = 'ST01: Admin User Create',
         variant    = 'ST01A: Admin User Create Modal',
-        timeTracker = trackers.get(experiment, variant, 'Time on Page (in minutes)'),
+        timeTracker = trackers.get(experiment, variant, 'Time on Page'),
         saveTracker = trackers.get(experiment, variant, 'Saved User');
-    if(featureFlags.isOn('ST01B')) {
-        $scope.goTo('app.admin.users.create'); // tracking on this page
+    if(featureFlags.isOn('ST01B')) { // ... 
     } else {
         timeTracker.trackPromise( // <- tracks how long the dialog is open
             UserCreateDialog.show()
@@ -113,7 +126,8 @@ function showCreateUser(user, trackers) {
                 }).catch(function() {
                     saveTracker.trackEvent(0); // <- tracks non-save
                 }));
-    }}
+    }
+}
           </code></pre>
         </section>
       </section>
