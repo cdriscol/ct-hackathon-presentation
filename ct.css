@@ -11,8 +11,10 @@ section.has-light-background, section.has-light-background h1, section.has-light
  * GLOBAL STYLES
  *********************************************/
 body {
-  background: #39424C;
-  background-color: #39424C; }
+  /*background: #39424C;*/
+  background-color: #39424C; 
+  background-image: url('img/bg-img.jpg');
+}
 
 .reveal {
   font-family: "Roboto", Helvetica, sans-serif;
@@ -220,7 +222,9 @@ body {
 .reveal .roll span:after {
   color: #fff;
   background: #068de9; }
-
+button:focus{
+	outline:0;
+}
 /*********************************************
  * IMAGES
  *********************************************/
