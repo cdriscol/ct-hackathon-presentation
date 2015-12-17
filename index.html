@@ -15,17 +15,124 @@
   <div class="reveal">
     <div class="slides">
       <section class="present">
-        <h2>CT 2015 Hackathon AB Testing</h2>
+        <h2>CT 2015 Hackathon A/B Testing</h2>
         <p>by Chris Driscol &amp; Steve Tyree</p>
       </section>
       <section>
-        <h2>What is this talk about?</h2>
+        <h2>wtf is a/b testing?</h2>
         <ul>
-          <li>Things..</li>
+          <li class="fragment">expirements</li>
+          <li class="fragment">comparing 2+ designs, workflows, etc</li>
+          <li class="fragment">collecting data</li>
         </ul>
       </section>
       <section>
-        <h2>Questions?</h2>
+        <h2>what we needed:</h2>
+        <ul>
+          <li class="fragment">experiments</li>
+          <li class="fragment">toggles</li>
+          <li class="fragment">analytics</li>
+        </ul>
+      </section>
+      <section>
+        <section>
+          <h2>experiment..</h2>
+          <h3 class="fragment">user creation</h3>
+        </section>
+        <section>
+          <h2>using a modal (A)</h2>
+          <img width="500" data-src="img/uc_modal.png"></img>
+        </section>
+        <section>
+          <h2>using a page (B)</h2>
+          <img width="500" data-src="img/uc_page.png"></img>
+        </section>
+        <section>
+          <h2>measuring</h2>
+          <ul>
+            <li class="fragment">time to create</li>
+            <li class="fragment">saves per view</li>
+          </ul>
+        </section>
+        <section>
+          <h2>an example..</h2>
+          <a href="http://localhost:9009/#/admin/users" target="_blank">create user</a>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>feature toggles</h2>
+          <ul>
+            <li class="fragment">toggling features on/off</li>
+            <li class="fragment">user and/or tenant based</li>
+            <li class="fragment">experimenting</li>
+            <li class="fragment">phased rollouts</li>
+            <li class="fragment">less branching</li>
+          </ul>
+        </section>
+        <section>
+          <h2>an example..</h2>
+          <a href="http://localhost:9009/#/dashboard" target="_blank">fuzzy router</a>
+        </section>
+        <section>
+          <h2>show me code..</h2>
+          <pre><code class="language-javascript" data-trim contenteditable>
+if(featureFlags.isOn('fuzzy-router')) {
+  //.. do stuffs
+}
+          </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>analytics</h2>
+          <ul>
+            <li class="fragment">piwik events</li>
+            <li class="fragment">this sucked..</li>
+          </ul>
+        </section>
+        <section>
+          <!-- TODO: REPLACE WITH PIWIK SCREENSHOT -->
+          <img width="500" data-src="img/uc_modal.png"></img>
+        </section>
+        <section>
+          <h2>show me code..</h2>
+          <pre><code class="language-javascript" data-trim contenteditable>
+function showCreateUser(user, trackers) {
+    var experiment = 'ST01: Admin User Create',
+        variant    = 'ST01A: Admin User Create Modal',
+        timeTracker = trackers.get(experiment, variant, 'Time on Page (in minutes)'),
+        saveTracker = trackers.get(experiment, variant, 'Saved User');
+    if(featureFlags.isOn('ST01B')) {
+        $scope.goTo('app.admin.users.create'); // tracking on this page
+    } else {
+        timeTracker.trackPromise( // <- tracks how long the dialog is open
+            UserCreateDialog.show()
+                .then(function(user) {
+                    saveTracker.trackEvent(1); // <- tracks save
+                }).catch(function() {
+                    saveTracker.trackEvent(0); // <- tracks non-save
+                }));
+    }}
+          </code></pre>
+        </section>
+      </section>
+      <section>
+        <h2>what we learned</h2>
+        <ul>
+          <li class="fragment">piwik is not good at experiments</li>
+          <li class="fragment">easy to implement toggles/metrics</li>
+          <li class="fragment">A/B Testing is common</li>
+          <li class="fragment">toggles are cool</li>
+        </ul>
+      </section>
+      <section>
+        <h2>next steps would be..</h2>
+        <ul>
+          <li class="fragment">define some experiments</li>
+          <li class="fragment">pick an experiment platform</li>
+          <li class="fragment">build robust toggles</li>
+        </ul>
       </section>
     </div>
   </div>
