@@ -16,12 +16,12 @@
     <div class="slides">
       <section class="present">
         <h2>CT 2015 Hackathon A/B Testing</h2>
-        <img data-src="http://cdn.meme.am/instances/55471036.jpg">
+        <img data-src="img/hackathon.jpg">
         <p>Chris Driscol &amp; Steve Tyree</p>
       </section>
       <section>
         <h2>wtf is a/b testing?</h2>
-        <img data-src="http://cdn.gifbay.com/2013/08/when_i_walk_into_the_mens_bathroom_and_there_are_no_urinals-76365.gif">
+        <img data-src="img/confused.gif">
         <ul>
           <li class="fragment">expirements</li>
           <li class="fragment">comparing 2+ designs, workflows, etc</li>
@@ -48,10 +48,6 @@
           </ul>
         </section>
         <section>
-          <h2>an example..</h2>
-          <a href="http://localhost:9009/#/dashboard" target="_blank">fuzzy router</a>
-        </section>
-        <section>
           <h2>show me code..</h2>
           <pre><code class="language-javascript" data-trim contenteditable>
 if(featureFlags.isOn('fuzzy-router')) {
@@ -59,13 +55,17 @@ if(featureFlags.isOn('fuzzy-router')) {
 }
           </code></pre>
         </section>
+        <section>
+          <h2>an example..</h2>
+          <a href="http://localhost:9009/#/dashboard" target="_blank">fuzzy router</a>
+        </section>
       </section>
       <section>
         <section>
           <h2>experiment..</h2>
           <span class="fragment">
             <p>user creation</p>
-            <img width="500" data-src="https://d.gr-assets.com/hostedimages/1442858204ra/16285337.gif"></img>
+            <img width="500" data-src="img/frankenstein.gif"></img>
           </span>
         </section>
         <section>
@@ -84,20 +84,20 @@ if(featureFlags.isOn('fuzzy-router')) {
           </ul>
         </section>
         <section>
-          <h2>an example..</h2>
-          <a href="http://localhost:9009/#/admin/users" target="_blank">create user</a>
-        </section>
-        <section>
           <h2>code please..</h2>
           <pre><code class="language-javascript" data-trim contenteditable>
-function showCreateUser(user, trackers) {
-    if(featureFlags.isOn('ST01B')) {
-        // navigate to page
-    } else {
-        // show dialog
-    }
-}
+            function showCreateUser(user, trackers) {
+              if(featureFlags.isOn('ST01B')) {
+                // navigate to page
+              } else {
+                // show dialog
+              }
+            }
           </code></pre>
+        </section>
+        <section>
+          <h2>an example..</h2>
+          <a href="http://localhost:9009/#/admin/users" target="_blank">create user</a>
         </section>
       </section>
       <section>
@@ -157,7 +157,8 @@ function showCreateUser(user, trackers) {
   <script>
     Reveal.initialize({
       dependencies: [
-        { src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        { src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        { src: 'bower_components/reveal.js/plugin/zoom-js/zoom.js', async: true }
       ],
       history: true
     });
